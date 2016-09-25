@@ -40,6 +40,8 @@ const nth = R.nth;
 
 const compose = R.compose;
 
+const curry = R.curry;
+
 const map = R.map;
 
 const filter = R.filter;
@@ -123,13 +125,13 @@ const getLt100Pages = filter(compose(lt100, getPageCount));
 
 const getLt4Dollars = filter(compose(lt4, getComicPrice));
 
-const displayComics = (mountPoint, template, comics) =>
-  mountPoint.innerHTML = template({ comics });
+const displayComics = curry((mountPoint, template, comics) =>
+  mountPoint.innerHTML = template({ comics }));
 
 const filterComics = compose(getLt4Dollars, getLt100Pages);
 
 const renderComics = compose(
-  displayComics.bind(null, mountPoint, template),
+  displayComics(mountPoint, template),
   prepareComicsForDisplay
 );
 
