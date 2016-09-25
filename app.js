@@ -126,8 +126,6 @@ const getLt4Dollars = filter(compose(lt4, getComicPrice));
 const displayComics = (mountPoint, template, comics) =>
   mountPoint.innerHTML = template({ comics });
 
-const parseResponse = compose(getComicsFromResponse, responseToJSON);
-
 const filterComics = compose(getLt4Dollars, getLt100Pages);
 
 const renderComics = compose(
@@ -136,6 +134,7 @@ const renderComics = compose(
 );
 
 fetch(dataSource)
-  .then(parseResponse)
+  .then(responseToJSON)
+  .then(getComicsFromResponse)
   .then(filterComics)
   .then(renderComics);
