@@ -27,6 +27,11 @@
 
 /* Utilities */
 
+const log = (value) => {
+  console.log(value);
+  return value;
+};
+
 const prop = R.prop;
 
 const gt = R.gt;
